@@ -1,0 +1,122 @@
+<div class="bg-light bg-gradient position-relative px-3 py-5 clock-frame">
+    <div class="clock row m-0">
+        <div class="times m-2">
+            <div class="time">
+                <span id="hour">23</span>
+            </div>
+            <div class="title">
+                <span>Hours</span>
+            </div>
+        </div>
+        <div class="times m-2">
+            <div class="time">
+                <span id="minute">28</span>
+            </div>
+            <div class="title">
+                <span>Minutes</span>
+            </div>
+        </div>
+        <div class="times m-2">
+            <div class="time">
+                <span id="second">26</span>
+            </div>
+            <div class="title">
+                <span>Seconds</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--style CSS-->
+<style>
+    .clock-frame {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: white;
+    }
+
+    .clock-frame .clock {
+        max-width: 800px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .clock-frame .clock .times {
+        width: 200px;
+        height: 250px;
+        position: relative;
+    }
+
+    .clock-frame .clock .times::before {
+        content: "";
+        position: absolute;
+        transform-origin: bottom;
+    }
+
+    .clock-frame .clock .times::after {
+        content: "";
+        position: absolute;
+        transform-origin: left;
+    }
+
+    .clock-frame .clock .times .time {
+        width: 100%;
+        height: 180px;
+        text-align: center;
+        background: #003f83;
+        line-height: 180px;
+        font-size: 5em;
+        letter-spacing: 3px;
+    }
+
+    .clock-frame .clock .times .title {
+        width: 100%;
+        height: 70px;
+        text-align: center;
+        line-height: 70px;
+        background: #0051a9;
+        font-size: 2em;
+        letter-spacing: 2px;
+    }
+
+    .clock-frame .clock .times .title::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 250px;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        filter: blur(5px);
+    }
+</style>
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+
+
+        const hours = document.querySelector('#hour');
+        const minutes = document.querySelector('#minute');
+        const seconds = document.querySelector('#second');
+        function clock() {
+            let h = new Date().getHours();
+            let m = new Date().getMinutes();
+            let s = new Date().getSeconds();
+            hours.textContent = h;
+            minutes.textContent = m;
+            seconds.textContent = s;
+        }
+        // clock();
+        let interval = setInterval(clock, 1000);
+    });
+</script>
+
+
+<?php return ob_get_clean();
+    }
+    add_shortcode('digitalclock', 'digital_clock');
+    <?php echo do_shortcode('[digitalclock]') ;?>
